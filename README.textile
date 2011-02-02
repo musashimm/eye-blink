@@ -1,9 +1,9 @@
 
 *Eye-Blink* - Simple Eyes system for paintball loader
 
-h1. Introduction
+h2. Introduction
 
-This project is designed for paintball loaders, which do not have eyes system. It can reduce consumption of battery power and reduce motor noise by turning motor off if marker is not shooting.
+This project is designed for paintball loaders, which do not have eyes system. It can reduce consumption of battery power and reduce motor noise by turning motor off if marker is not in use.
 
 h2. Project files
 
@@ -12,6 +12,6 @@ h2. Project files
 * software - directory for software part
 * COPING - text of GPL licence
 
-h3. Hardware
+h2. Hardware
 
 The project is designed for AVR microcontroller but it can be adjusted for any other chip.
