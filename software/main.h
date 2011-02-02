@@ -44,6 +44,8 @@
 #define EYE_PORTOUT PORT(EYE_PORT)
 #define EYE_DDR DDR(EYE_PORT)
 
+/** config pin is for future use
+*/
 #define	CONFIG_PIN 0
 #define CONFIG_PORT B
 #define CONFIG_PORTOUT PORT(CONFIG_PORT)
@@ -61,9 +63,10 @@
 #define eye_on() EYE_PORTOUT &= ~_BV(EYE_PIN)
 #define eye_toggle() EYE_PORTOUT ^= _BV(EYE_PIN)
 
-/** ustawienia timera */
-#define TAU 245
-#define TICKS 4
+/** timer settings */
+#define TAU 97
+#define TICKS 10
+#define TICKS_LED 3
 
 #define MOTOR_RUNNING_TIME 5
 

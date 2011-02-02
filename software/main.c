@@ -26,7 +26,8 @@
 #include <avr/interrupt.h>
 #include "main.h"
 
-volatile uint8_t clock_250ms = TICKS;
+volatile uint8_t clock_100ms = TICKS;
+volatile uint8_t clock_led = TICKS_LED;
 volatile uint8_t motor_run_timer = MOTOR_RUNNING_TIME;
 
 /** Inicjalizacja urządzeń wejścia / wyjścia.
@@ -40,7 +41,7 @@ void ioinit(void) {
 	LED_DDR |= _BV(LED_PIN);
 	EYE_DDR |= _BV(EYE_PIN);
 
-	OCR0A = 245;                         // przy zegarze 1Mhz/1024/245 daje nam w przybliżeniu 1/4 sekundy
+	OCR0A = TAU;                         // przy zegarze 1Mhz/1024/TAU daje nam w przybliżeniu 100ms
 	TCCR0A |= _BV(WGM01);                // CTC mode
 	TCCR0B |= _BV(CS02) | _BV(CS00);     // CLK/1024
 	TIMSK |= _BV(OCIE0A);                // enable interrupt on OCR0A match
@@ -53,9 +54,16 @@ void ioinit(void) {
 /** Przerwanie na porównanie timera0
 */
 ISR (TIM0_COMPA_vect) {
-	led_toggle();
-	if (!(--clock_250ms)) { 				//############### minęła sekunda
-    	clock_250ms = TICKS;
+	if(motor_run_timer) {
+		led_toggle();
+	} else {
+		if (!(--clock_led)) {
+			clock_led = TICKS_LED;
+			led_toggle();
+		}
+	}
+	if (!(--clock_100ms)) { 				//############### minęła sekunda
+    	clock_100ms = TICKS;
     	if (motor_run_timer) {
     		motor_run_timer--;
 		}
