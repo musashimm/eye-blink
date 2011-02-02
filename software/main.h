@@ -1,5 +1,5 @@
 /*
-    Eye-Bink Eyes for paintball loader
+    Eye-Blink - Eyes for paintball loader
     Copyright (C) 2011 Wojciech Todryk (wojciech@todryk.pl)
     Copyright (C) 2011 Sławomir Bednarczyk
 
@@ -39,8 +39,32 @@
 #define LED_PORTOUT PORT(LED_PORT)
 #define LED_DDR DDR(LED_PORT)
 
+#define	EYE_PIN 2
+#define EYE_PORT B
+#define EYE_PORTOUT PORT(EYE_PORT)
+#define EYE_DDR DDR(EYE_PORT)
+
+#define	CONFIG_PIN 0
+#define CONFIG_PORT B
+#define CONFIG_PORTOUT PORT(CONFIG_PORT)
+#define CONFIG_DDR DDR(CONFIG_PORT)
+
 #define motor_on() MOTOR_PORTOUT |= _BV(MOTOR_PIN)
 #define motor_off() MOTOR_PORTOUT &= ~_BV(MOTOR_PIN)
-#define led_on() LED_PORTOUT |= _BV(LED_PIN)
-#define led_off() LED_PORTOUT &= ~_BV(LED_PIN)
+#define motor_toggle() MOTOR_PORTOUT ^= _BV(MOTOR_PIN)
+
+#define led_off() LED_PORTOUT |= _BV(LED_PIN)
+#define led_on() LED_PORTOUT &= ~_BV(LED_PIN)
+#define led_toggle() LED_PORTOUT ^= _BV(LED_PIN)
+
+#define eye_off() EYE_PORTOUT |= _BV(EYE_PIN)
+#define eye_on() EYE_PORTOUT &= ~_BV(EYE_PIN)
+#define eye_toggle() EYE_PORTOUT ^= _BV(EYE_PIN)
+
+/** ustawienia timera */
+#define TAU 245
+#define TICKS 4
+
+#define MOTOR_RUNNING_TIME 5
+
 
