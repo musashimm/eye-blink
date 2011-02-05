@@ -34,6 +34,7 @@
 			<Add after="avr-objdump -h -S $(TARGET_OUTPUT_FILE) &gt; $(TARGET_OUTPUT_FILE).lss" />
 			<Mode after="always" />
 		</ExtraCommands>
+		<Unit filename="README.textile" />
 		<Unit filename="software/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
