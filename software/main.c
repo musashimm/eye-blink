@@ -34,8 +34,8 @@ volatile uint8_t motor_run_timer = MOTOR_RUNNING_TIME;
 */
 void ioinit(void) {
 
-	CONFIG_DDR &= ~_BV(CONFIG_PIN);
-	CONFIG_PORTOUT |= _BV(CONFIG_PIN);
+	OVERRIDE_DDR &= ~_BV(OVERRIDE_PIN);
+	OVERRIDE_PORTOUT |= _BV(OVERRIDE_PIN);
 
 	MOTOR_DDR |= _BV(MOTOR_PIN);
 	LED_DDR |= _BV(LED_PIN);
@@ -90,6 +90,10 @@ int main(void) {
     for(;;) {
 
 		wdt_reset();
+
+		if (!(OVERRIDE_PORTPIN & _BV(OVERRIDE_PIN))) {
+			motor_run_timer = MOTOR_RUNNING_TIME;
+		}
 
 		if (motor_run_timer) {
 			motor_on();
